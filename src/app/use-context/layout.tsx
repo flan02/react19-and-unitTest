@@ -1,8 +1,10 @@
+// TODO: This layout is only for react19 usecontext codinginflow. Probably, I'd need to change main layout for others react19 courses/features. This layout will be a copy in case I had to change it.
+
 import { AuthProvider } from "@/contexts/auth-provider";
 import { getCurrentUser } from "@/lib/auth";
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
-import "./globals.css";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
