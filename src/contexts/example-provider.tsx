@@ -2,7 +2,7 @@
 
 import { createContext, ReactNode } from "react";
 
-export const ExampleContext = createContext("This is the default value");
+export const ExampleContext = createContext("This is the default Context value with React19");
 
 interface ExampleProviderProps {
   children: ReactNode;
@@ -10,5 +10,7 @@ interface ExampleProviderProps {
 }
 
 export function ExampleProvider({ children, value }: ExampleProviderProps) {
-  return <ExampleContext value={value}>{children}</ExampleContext>;
+  if (!value) value = "If default value fails this message will appear";
+  // In react19 we don't need <ExampleContext.Provider /> anymore
+  return <ExampleContext value={value}>{children}</ExampleContext>
 }
