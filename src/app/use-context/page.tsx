@@ -4,34 +4,38 @@
 
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
+import { Button } from "@/components/ui/button";
 import { UserProfile } from "@/components/user-profile";
-import { ExampleContext } from "@/contexts/example-provider";
-import { getCurrentUser, signOut, type User } from "@/lib/auth";
-import { use, useEffect, useState } from "react";
+import { useState } from "react";
+// import { ExampleContext } from "@/contexts/example-provider";
+// import { getCurrentUser, signOut, type User } from "@/lib/auth";
+// import { use, useEffect, useState } from "react";
 
 export default function Home() {
   // TODO: use is a hook that allows you to access the context value
   // const message = use(ExampleContext) 
 
-  const [user, setUser] = useState<User | null>(null);
-  const [userLoading, setUserLoading] = useState(true);
+  // TODO: We move the fc, usestate & useeffect inside our Context
+  //const [user, setUser] = useState<User | null>(null);
+  //const [userLoading, setUserLoading] = useState(true);
 
 
+  // async function handleSignOut() {
+  //   await signOut();
+  //   setUser(null);
+  // }
 
-  async function handleSignOut() {
-    await signOut();
-    setUser(null);
-  }
+  // useEffect(() => {
+  //   async function fetchUser() {
+  //     const userData = await getCurrentUser();
+  //     setUser(userData);
+  //     setUserLoading(false);
+  //   }
 
-  useEffect(() => {
-    async function fetchUser() {
-      const userData = await getCurrentUser();
-      setUser(userData);
-      setUserLoading(false);
-    }
+  //   fetchUser();
+  // }, []);
 
-    fetchUser();
-  }, []);
+  const [isProfileDisabled, setIsProfileDisabled] = useState(false);
 
   return (
     <div>
@@ -45,7 +49,12 @@ export default function Home() {
 
         {/* Without Context */}
         {/* <UserProfile user={user} isLoading={userLoading} /> */}
-        <UserProfile />
+        <div className="mb-6 flex justify-center">
+          <Button onClick={() => setIsProfileDisabled(!isProfileDisabled)} variant='outline'>
+            {isProfileDisabled ? "Enable User Profile" : "Disable User Profile"}
+          </Button>
+        </div>
+        <UserProfile disabled={isProfileDisabled} />
       </main>
       <Footer />
     </div>

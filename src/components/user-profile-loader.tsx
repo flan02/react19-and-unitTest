@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export function UserProfileLoader() {
   return (
-    <Card className="mx-auto max-w-md">
+    <Card className="mx-auto max-w-md bg-gray-200">
       <CardHeader>
         <CardTitle>
           <Skeleton className="h-5 w-24" />

@@ -17,8 +17,9 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children, user: initialUser }: AuthProviderProps) {
-  const [user, setUser] = useState<User | null>(initialUser ?? null);
-  const [isLoading, setIsLoading] = useState(!initialUser);
+
+  const [user, setUser] = useState<User | null>(initialUser ?? null); // Comes from server-side
+  const [isLoading, setIsLoading] = useState(!initialUser); // true
 
   async function handleSignOut() {
     await signOut();
@@ -32,17 +33,14 @@ export function AuthProvider({ children, user: initialUser }: AuthProviderProps)
       setIsLoading(false);
     }
 
+    //TODO: If not user available from the server, we fetch it in the client-side
     if (!initialUser) {
       fetchUser();
     }
-  }, [initialUser]);
+  }, [initialUser])
 
 
-  const value: AuthContext = {
-    user,
-    isLoading,
-    signOut: handleSignOut,
-  };
+  const value: AuthContext = { user, isLoading, signOut: handleSignOut }
 
   return <AuthContext value={value}>{children}</AuthContext>;
 }
